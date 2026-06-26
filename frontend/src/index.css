@@ -1,0 +1,51 @@
+:root {
+  --primary-color: #C84B70; /* Elegant Muted Rose Pink */
+  --primary-light: #F6E2E6; /* Pale Blush Pink */
+  --primary-dark: #A63454; /* Deep Velvet Rose */
+  --bg-color: #FCF6F5; /* Warm Luxury Cream */
+  --card-bg: #FFFFFF;
+  --text-main: #2D2424; /* Rich Charcoal */
+  --text-muted: #6E5D5D; /* Warm Grey/Brown */
+  --gold-accent: #D4AF37; /* Subtle Luxury Gold */
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  
+  --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  --shadow-subtle: 0 10px 30px rgba(200, 75, 112, 0.05);
+  --shadow-hover: 0 20px 40px rgba(200, 75, 112, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
