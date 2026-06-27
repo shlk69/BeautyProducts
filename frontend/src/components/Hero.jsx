@@ -13,10 +13,6 @@ const Hero = () => {
             <a href="#" class="btn btn-text">BROWSE COLLECTIONS <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
-        <div class="hero-image-wrapper">
-          <div class="hero-circle-bg"></div>
-          <img src="/images/hero_model.png" alt="Zack Beauty Model Showcase" class="hero-image" />
-        </div>
       </div>
     </section>
   );
