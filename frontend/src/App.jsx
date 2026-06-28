@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -8,6 +9,7 @@ import BestSellers from './components/BestSellers';
 import Promotions from './components/Promotions';
 import Instagram from './components/Instagram';
 import Footer from './components/Footer';
+import HaircarePage from './pages/HaircarePage';
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -112,16 +114,23 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header cartCount={cartCount} />
-      <Hero />
-      <Features />
-      <Categories />
-      <BestSellers products={products} onAddToCart={handleAddToCart} />
-      <Promotions />
-      <Instagram />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <div className="App">
+            <Header cartCount={cartCount} />
+            <Hero />
+            <Features />
+            <Categories />
+            <BestSellers products={products} onAddToCart={handleAddToCart} />
+            <Promotions />
+            <Instagram />
+            <Footer />
+          </div>
+        } />
+        <Route path="/haircare" element={<HaircarePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

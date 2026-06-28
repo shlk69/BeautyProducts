@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = ({ cartCount }) => {
   return (
@@ -24,7 +25,7 @@ const Header = ({ cartCount }) => {
               <li><a href="#shop">Shop</a></li>
               <li><a href="#skincare">Skincare</a></li>
               <li><a href="#makeup">Makeup</a></li>
-              <li><a href="#haircare">Haircare</a></li>
+              <li><Link to="/haircare">Haircare</Link></li>
               <li><a href="#accessories">Accessories</a></li>
               <li><a href="#about">About Us</a></li>
               <li><a href="#contact">Contact</a></li>
