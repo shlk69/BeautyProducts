@@ -13,7 +13,7 @@ const Instagram = () => {
   return (
     <section class="instagram-section">
       <h2 class="section-title">FOLLOW US ON INSTAGRAM</h2>
-      <p class="insta-handle">@ZACK.BEAUTY</p>
+
       <div class="insta-grid">
         {instaImages.map((imgSrc, idx) => (
           <div class="insta-item" key={idx}>
