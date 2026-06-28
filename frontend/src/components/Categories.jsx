@@ -10,7 +10,11 @@ const Categories = () => {
   ];
 
   return (
-    <section class="categories-section">
+    <section class="categories-section" id="shop">
+      <div id="skincare" style={{scrollMarginTop: '80px'}}></div>
+      <div id="makeup" style={{scrollMarginTop: '80px'}}></div>
+      <div id="haircare" style={{scrollMarginTop: '80px'}}></div>
+      <div id="accessories" style={{scrollMarginTop: '80px'}}></div>
       <h2 class="section-title">SHOP BY CATEGORY</h2>
       <div class="category-divider"><i class="fa-solid fa-crown"></i></div>
       <div class="categories-container">

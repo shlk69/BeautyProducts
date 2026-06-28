@@ -15,7 +15,7 @@ const BestSellers = ({ products, onAddToCart }) => {
   };
 
   return (
-    <section class="best-sellers-section">
+    <section class="best-sellers-section" id="bestsellers">
       <h2 class="section-title">BEST SELLERS</h2>
       <div class="category-divider"><i class="fa-solid fa-star"></i></div>
       

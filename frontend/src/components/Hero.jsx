@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section class="hero-section">
+    <section class="hero-section" id="home">
       <div class="hero-container">
         <div class="hero-content">
           <span class="hero-subtitle">ENHANCE YOUR NATURAL BEAUTY</span>

@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       {/* Bottom Quality Badges */}
-      <section class="footer-badges-section">
+      <section class="footer-badges-section" id="about">
         <div class="badges-container">
           <div class="badge-item">
             <span class="badge-icon"><i class="fa-solid fa-paw"></i></span>
@@ -30,7 +30,7 @@ const Footer = () => {
       </section>
 
       {/* Footer */}
-      <footer class="site-footer">
+      <footer class="site-footer" id="contact">
         <div class="footer-container">
           <div class="footer-col brand-col">
             <a href="#" class="logo">

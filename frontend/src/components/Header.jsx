@@ -20,14 +20,14 @@ const Header = ({ cartCount }) => {
           {/* Navigation Menu */}
           <nav class="navbar">
             <ul class="nav-links">
-              <li><a href="#" class="active">Home</a></li>
-              <li><a href="#">Shop</a></li>
-              <li><a href="#">Skincare</a></li>
-              <li><a href="#">Makeup</a></li>
-              <li><a href="#">Haircare</a></li>
-              <li><a href="#">Accessories</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="#home" class="active">Home</a></li>
+              <li><a href="#shop">Shop</a></li>
+              <li><a href="#skincare">Skincare</a></li>
+              <li><a href="#makeup">Makeup</a></li>
+              <li><a href="#haircare">Haircare</a></li>
+              <li><a href="#accessories">Accessories</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
           </nav>
 

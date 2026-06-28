@@ -1,5 +1,17 @@
 /* App level layout styles */
 
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset for fixed header when anchors scroll */
+section[id],
+footer[id],
+div[id] {
+  scroll-margin-top: 75px;
+}
+
 /* Announcement Bar */
 .top-announcement {
   background-color: var(--primary-light);
