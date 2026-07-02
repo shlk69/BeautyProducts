@@ -10,6 +10,7 @@ import Promotions from './components/Promotions';
 import Instagram from './components/Instagram';
 import Footer from './components/Footer';
 import HaircarePage from './pages/HaircarePage';
+import AllProductsPage from './pages/AllProductsPage';
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -129,6 +130,7 @@ function App() {
           </div>
         } />
         <Route path="/haircare" element={<HaircarePage />} />
+        <Route path="/shop" element={<AllProductsPage />} />
       </Routes>
     </BrowserRouter>
   );

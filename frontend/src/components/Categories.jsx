@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
   const categoryItems = [
@@ -24,7 +25,7 @@ const Categories = () => {
               <img src={cat.img} alt={`${cat.title} Category`} />
             </div>
             <h3>{cat.title}</h3>
-            <a href="#" class="category-link">Shop Now <i class="fa-solid fa-arrow-right-long"></i></a>
+            <Link to="/shop" class="category-link">Shop Now <i class="fa-solid fa-arrow-right-long"></i></Link>
           </div>
         ))}
       </div>

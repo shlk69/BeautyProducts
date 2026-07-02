@@ -1,0 +1,212 @@
+/* Styles for the All Products catalog page */
+
+.all-products-hero {
+  position: relative;
+  height: 250px;
+  background-image: linear-gradient(rgba(45, 36, 36, 0.4), rgba(45, 36, 36, 0.6)), url('/images/herobanner.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+
+.all-products-hero .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(200, 75, 112, 0.15); /* Tinted with brand color */
+  z-index: 1;
+}
+
+.all-products-hero .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.all-products-hero h1 {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.all-products-hero p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* Catalog Section */
+.catalog-section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 20px 80px 20px;
+}
+
+/* Toolbar styling */
+.catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(200, 75, 112, 0.1);
+  padding-bottom: 25px;
+}
+
+.search-box-wrapper {
+  position: relative;
+  min-width: 280px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px 12px 42px;
+  border: 1px solid rgba(200, 75, 112, 0.2);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  outline: none;
+  background-color: #fff;
+  transition: var(--transition-smooth);
+}
+
+.search-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(200, 75, 112, 0.1);
+}
+
+/* Category Filters */
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-tab-btn {
+  background: none;
+  border: 1px solid rgba(200, 75, 112, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: var(--transition-smooth);
+}
+
+.filter-tab-btn:hover,
+.filter-tab-btn.active {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(200, 75, 112, 0.15);
+}
+
+/* Sort Dropdown */
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-wrapper label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.sort-dropdown {
+  padding: 10px 15px;
+  border: 1px solid rgba(200, 75, 112, 0.2);
+  border-radius: 4px;
+  background-color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: var(--transition-smooth);
+}
+
+.sort-dropdown:focus {
+  border-color: var(--primary-color);
+}
+
+/* Grid layout */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+/* No Products Found */
+.no-products-found {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+}
+
+.no-products-found i {
+  font-size: 3rem;
+  color: var(--primary-light);
+  margin-bottom: 20px;
+}
+
+.no-products-found h3 {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .catalog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .catalog-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search-box-wrapper {
+    width: 100%;
+  }
+  .category-filters {
+    justify-content: center;
+  }
+  .sort-wrapper {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 550px) {
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+  .all-products-hero h1 {
+    font-size: 2.2rem;
+  }
+}

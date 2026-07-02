@@ -13,20 +13,20 @@ const Header = ({ cartCount }) => {
       <header class="main-header">
         <div class="header-container">
           {/* Logo */}
-          <a href="#" class="logo">
+          <Link to="/" class="logo">
             <span class="logo-icon"><i class="fa-solid fa-leaf"></i></span>
             Zack <span>BEAUTY</span>
-          </a>
+          </Link>
 
           {/* Navigation Menu */}
           <nav class="navbar">
             <ul class="nav-links">
-              <li><a href="#home" class="active">Home</a></li>
-              <li><a href="#shop">Shop</a></li>
-              <li><a href="#skincare">Skincare</a></li>
-              <li><a href="#makeup">Makeup</a></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/shop">Shop</Link></li>
+              <li><Link to="/shop">Skincare</Link></li>
+              <li><Link to="/shop">Makeup</Link></li>
               <li><Link to="/haircare">Haircare</Link></li>
-              <li><a href="#accessories">Accessories</a></li>
+              <li><Link to="/shop">Accessories</Link></li>
               <li><a href="#about">About Us</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
