@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/HaircarePage.css';
+import { useCart } from '../context/CartContext';
 
 const haircareProducts = [
   {
@@ -214,7 +215,7 @@ const StarRating = ({ rating }) => (
 );
 
 export default function HaircarePage() {
-  const [cartCount, setCartCount] = useState(0);
+  const { addToCart, cartCount } = useCart();
   const [addedId, setAddedId] = useState(null);
   
   // Category Filter state
@@ -229,7 +230,7 @@ export default function HaircarePage() {
   const [activeFaq, setActiveFaq] = useState(null);
 
   const handleAdd = (product) => {
-    setCartCount(prev => prev + 1);
+    addToCart(product);
     setAddedId(product.id);
     showToastNotification(`Added ${product.name} to your bag!`);
     setTimeout(() => setAddedId(null), 1500);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
@@ -11,9 +11,11 @@ import Instagram from './components/Instagram';
 import Footer from './components/Footer';
 import HaircarePage from './pages/HaircarePage';
 import AllProductsPage from './pages/AllProductsPage';
+import CartPage from './pages/CartPage';
+import { useCart } from './context/CartContext';
 
 function App() {
-  const [cartCount, setCartCount] = useState(0);
+  const { addToCart, cartCount } = useCart();
 
   // Best Sellers Products Array
   const products = [
@@ -66,9 +68,9 @@ function App() {
     }
   ];
 
-  const handleAddToCart = (productName) => {
-    setCartCount(prev => prev + 1);
-    showToastNotification(`Added ${productName} to your bag!`);
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    showToastNotification(`Added ${product.name} to your bag!`);
   };
 
   const showToastNotification = (message) => {
@@ -131,6 +133,7 @@ function App() {
         } />
         <Route path="/haircare" element={<HaircarePage />} />
         <Route path="/shop" element={<AllProductsPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </BrowserRouter>
   );

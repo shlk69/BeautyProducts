@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import '../styles/AllProductsPage.css';
+import { useCart } from '../context/CartContext';
 
 // All products mock database
 const allProductsData = [
@@ -151,17 +152,17 @@ const allProductsData = [
 ];
 
 export default function AllProductsPage() {
-  const [cartCount, setCartCount] = useState(0);
+  const { addToCart, cartCount } = useCart();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('featured');
 
-  const handleAddToCart = (productName) => {
-    setCartCount(prev => prev + 1);
+  const handleAddToCart = (product) => {
+    addToCart(product);
     // Simple toast notification
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
-    toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> Added ${productName} to your bag!`;
+    toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> Added ${product.name} to your bag!`;
     
     Object.assign(toast.style, {
       position: 'fixed',

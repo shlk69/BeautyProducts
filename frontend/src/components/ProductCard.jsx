@@ -6,7 +6,7 @@ const ProductCard = ({ name, price, oldPrice, img, rating, reviews, isSale, onAd
       <div class="product-img-box">
         {isSale && <span class="sale-badge">SALE</span>}
         <img src={img} alt={name} />
-        <button class="add-to-cart-overlay" onClick={() => onAddToCart(name)}>ADD TO CART</button>
+        <button className="add-to-cart-overlay" onClick={() => onAddToCart({ name, price, oldPrice, img, rating, reviews, isSale })}>ADD TO CART</button>
       </div>
       <div class="product-info">
         <div class="rating">

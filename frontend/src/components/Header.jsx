@@ -36,10 +36,10 @@ const Header = ({ cartCount }) => {
           <div class="header-actions">
             <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
             <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
-            <button class="action-btn cart-toggle-btn" aria-label="Cart">
-              <i class="fa-solid fa-bag-shopping"></i>
-              <span class="cart-badge" id="cartCount">{cartCount}</span>
-            </button>
+            <Link to="/cart" className="action-btn cart-toggle-btn" aria-label="Cart">
+              <i className="fa-solid fa-bag-shopping"></i>
+              <span className="cart-badge" id="cartCount">{cartCount}</span>
+            </Link>
           </div>
         </div>
       </header>
