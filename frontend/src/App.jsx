@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import HaircarePage from './pages/HaircarePage';
 import AllProductsPage from './pages/AllProductsPage';
 import CartPage from './pages/CartPage';
+import AboutPage from './pages/AboutPage';
 import { useCart } from './context/CartContext';
 
 function App() {
@@ -134,6 +135,7 @@ function App() {
         <Route path="/haircare" element={<HaircarePage />} />
         <Route path="/shop" element={<AllProductsPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -27,7 +27,7 @@ const Header = ({ cartCount }) => {
               <li><Link to="/shop">Makeup</Link></li>
               <li><Link to="/haircare">Haircare</Link></li>
               <li><Link to="/shop">Accessories</Link></li>
-              <li><a href="#about">About Us</a></li>
+              <li><Link to="/about">About Us</Link></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </nav>
