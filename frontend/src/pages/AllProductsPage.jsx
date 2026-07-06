@@ -5,153 +5,11 @@ import ProductCard from '../components/ProductCard';
 import '../styles/AllProductsPage.css';
 import { useCart } from '../context/CartContext';
 
-// All products mock database
-const allProductsData = [
-  // Skincare
-  {
-    id: 1,
-    name: 'Hyaluronic Acid Serum',
-    price: 24.99,
-    img: '/images/product_serum.png',
-    rating: 5,
-    reviews: 123,
-    isSale: false,
-    category: 'skincare',
-    desc: 'Deep hydration serum infused with pure hyaluronic acid for plump, radiant skin.'
-  },
-  {
-    id: 3,
-    name: 'Collagen Night Cream',
-    price: 19.99,
-    img: '/images/product_night_cream.png',
-    rating: 5,
-    reviews: 123,
-    isSale: false,
-    category: 'skincare',
-    desc: 'Overnight collagen-boosting moisturizer that restores firmness and reduces fine lines.'
-  },
-  {
-    id: 101,
-    name: 'Vitamin C Brightening Cleanser',
-    price: 16.99,
-    oldPrice: 21.99,
-    img: '/images/category_skincare.png', // Fallback or placeholder, categories look nice
-    rating: 4,
-    reviews: 84,
-    isSale: true,
-    category: 'skincare',
-    desc: 'Refreshing daily cleanser that washes away impurities and illuminates dull skin.'
-  },
-  // Makeup
-  {
-    id: 2,
-    name: 'Makeup Brush Set (10pcs)',
-    price: 29.99,
-    img: '/images/product_brush_set.png',
-    rating: 5,
-    reviews: 123,
-    isSale: false,
-    category: 'makeup',
-    desc: 'Premium synthetic fiber brushes for professional-grade makeup application.'
-  },
-  {
-    id: 4,
-    name: 'Matte Lipstick',
-    price: 14.59,
-    oldPrice: 19.99,
-    img: '/images/product_lipstick.png',
-    rating: 5,
-    reviews: 123,
-    isSale: true,
-    category: 'makeup',
-    desc: 'Highly pigmented matte lipstick that stays vibrant all day without drying.'
-  },
-  {
-    id: 201,
-    name: 'Liquid Foundation SPF 15',
-    price: 22.49,
-    img: '/images/category_makeup.png',
-    rating: 4,
-    reviews: 65,
-    isSale: false,
-    category: 'makeup',
-    desc: 'Lightweight buildable foundation that matches skin tone for a flawless finish.'
-  },
-  // Haircare
-  {
-    id: 301,
-    name: 'Argan Oil Hair Serum',
-    price: 22.99,
-    oldPrice: 29.99,
-    img: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=400&fit=crop',
-    rating: 5,
-    reviews: 214,
-    isSale: true,
-    category: 'haircare',
-    desc: 'Lightweight serum with pure Moroccan argan oil for frizz-free, glossy hair.'
-  },
-  {
-    id: 302,
-    name: 'Keratin Repair Mask',
-    price: 18.99,
-    img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&h=400&fit=crop',
-    rating: 4,
-    reviews: 98,
-    isSale: false,
-    category: 'haircare',
-    desc: 'Deep repair treatment that restores elasticity and shine in damaged hair.'
-  },
-  {
-    id: 303,
-    name: 'Scalp Refresh Shampoo',
-    price: 15.99,
-    img: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=400&h=400&fit=crop',
-    rating: 5,
-    reviews: 176,
-    isSale: false,
-    category: 'haircare',
-    desc: 'Gentle, sulfate-free shampoo that cleanses and balances scalp health.'
-  },
-  // Fragrance
-  {
-    id: 5,
-    name: 'Luxury Perfume',
-    price: 34.99,
-    oldPrice: 49.99,
-    img: '/images/product_perfume.png',
-    rating: 5,
-    reviews: 123,
-    isSale: true,
-    category: 'fragrance',
-    desc: 'Exquisite blend of floral and woody notes designed for special occasions.'
-  },
-  {
-    id: 401,
-    name: 'Rose Oud Body Mist',
-    price: 18.00,
-    img: '/images/category_fragrance.png',
-    rating: 5,
-    reviews: 42,
-    isSale: false,
-    category: 'fragrance',
-    desc: 'Sensual body mist featuring rich rose petals and dark agarwood.'
-  },
-  // Accessories
-  {
-    id: 501,
-    name: 'Rose Quartz Facial Roller',
-    price: 15.99,
-    oldPrice: 24.99,
-    img: '/images/category_accessories.png',
-    rating: 4,
-    reviews: 56,
-    isSale: true,
-    category: 'accessories',
-    desc: 'Dual-sided facial massager to promote blood circulation and reduce puffiness.'
-  }
-];
+import { useShopData } from '../context/ShopDataContext';
 
 export default function AllProductsPage() {
+
+  const { products } = useShopData();
   const { addToCart, cartCount } = useCart();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -203,7 +61,7 @@ export default function AllProductsPage() {
   };
 
   // Filter and sort products
-  const filteredProducts = allProductsData
+  const filteredProducts = (products || [])
     .filter(product => {
       const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

@@ -14,60 +14,18 @@ import AllProductsPage from './pages/AllProductsPage';
 import CartPage from './pages/CartPage';
 import AboutPage from './pages/AboutPage';
 import { useCart } from './context/CartContext';
+import ProfilePage from './pages/ProfilePage';
+import { useShopData } from './context/ShopDataContext';
+import AdminPage from './pages/AdminPage';
+
 
 function App() {
   const { addToCart, cartCount } = useCart();
+  const { products } = useShopData();
 
-  // Best Sellers Products Array
-  const products = [
-    {
-      id: 1,
-      name: 'Hyaluronic Acid Serum',
-      price: 24.99,
-      img: '/images/product_serum.png',
-      rating: 5,
-      reviews: 123,
-      isSale: false
-    },
-    {
-      id: 2,
-      name: 'Makeup Brush Set (10pcs)',
-      price: 29.99,
-      img: '/images/product_brush_set.png',
-      rating: 5,
-      reviews: 123,
-      isSale: false
-    },
-    {
-      id: 3,
-      name: 'Collagen Night Cream',
-      price: 19.99,
-      img: '/images/product_night_cream.png',
-      rating: 5,
-      reviews: 123,
-      isSale: false
-    },
-    {
-      id: 4,
-      name: 'Matte Lipstick',
-      price: 14.59,
-      oldPrice: 19.99,
-      img: '/images/product_lipstick.png',
-      rating: 5,
-      reviews: 123,
-      isSale: true
-    },
-    {
-      id: 5,
-      name: 'Luxury Perfume',
-      price: 34.99,
-      oldPrice: 49.99,
-      img: '/images/product_perfume.png',
-      rating: 5,
-      reviews: 123,
-      isSale: true
-    }
-  ];
+  // Filter bestseller products from context
+  const bestSellers = (products || []).filter(p => p.isBestseller);
+
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -126,7 +84,7 @@ function App() {
             <Hero />
             <Features />
             <Categories />
-            <BestSellers products={products} onAddToCart={handleAddToCart} />
+            <BestSellers products={bestSellers} onAddToCart={handleAddToCart} />
             <Promotions />
             <Instagram />
             <Footer />
@@ -136,6 +94,8 @@ function App() {
         <Route path="/shop" element={<AllProductsPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );

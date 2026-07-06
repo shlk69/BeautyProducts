@@ -50,7 +50,8 @@ const Footer = () => {
             <h3>QUICK LINKS</h3>
             <ul>
               <li><Link to="/about">About Us</Link></li>
-              <li><a href="#">Our Products</a></li>
+              <li><Link to="/shop">Our Products</Link></li>
+              <li><Link to="/admin" style={{ color: 'var(--primary-color)', fontWeight: '600' }}>Admin Panel</Link></li>
               <li><a href="#">Beauty Blog</a></li>
               <li><a href="#">Contact Us</a></li>
             </ul>

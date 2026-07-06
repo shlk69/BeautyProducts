@@ -4,80 +4,8 @@ import Footer from '../components/Footer';
 import '../styles/HaircarePage.css';
 import { useCart } from '../context/CartContext';
 
-const haircareProducts = [
-  {
-    id: 1,
-    name: 'Argan Oil Hair Serum',
-    price: 22.99,
-    oldPrice: 29.99,
-    tag: 'BESTSELLER',
-    img: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=400&fit=crop',
-    rating: 5,
-    reviews: 214,
-    desc: 'Lightweight serum with pure Moroccan argan oil for frizz-free, glossy hair.',
-    category: 'oil-serum'
-  },
-  {
-    id: 2,
-    name: 'Keratin Repair Mask',
-    price: 18.99,
-    oldPrice: null,
-    tag: 'NEW',
-    img: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&h=400&fit=crop',
-    rating: 4,
-    reviews: 98,
-    desc: 'Deep repair treatment that restores elasticity and shine in damaged hair.',
-    category: 'mask-treatment'
-  },
-  {
-    id: 3,
-    name: 'Scalp Refresh Shampoo',
-    price: 15.99,
-    oldPrice: null,
-    tag: null,
-    img: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=400&h=400&fit=crop',
-    rating: 5,
-    reviews: 176,
-    desc: 'Gentle, sulfate-free shampoo that cleanses and balances scalp health.',
-    category: 'shampoo'
-  },
-  {
-    id: 4,
-    name: 'Biotin Volume Conditioner',
-    price: 16.49,
-    oldPrice: 21.99,
-    tag: 'SALE',
-    img: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=400&h=400&fit=crop',
-    rating: 4,
-    reviews: 132,
-    desc: 'Adds body and volume while nourishing strands with biotin & panthenol.',
-    category: 'conditioner'
-  },
-  {
-    id: 5,
-    name: 'Rose Water Hair Mist',
-    price: 12.99,
-    oldPrice: null,
-    tag: null,
-    img: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=400&h=400&fit=crop',
-    rating: 5,
-    reviews: 89,
-    desc: 'Refreshing floral mist that hydrates and adds a soft, natural fragrance.',
-    category: 'oil-serum'
-  },
-  {
-    id: 6,
-    name: 'Hot Oil Treatment',
-    price: 19.99,
-    oldPrice: null,
-    tag: 'NEW',
-    img: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=400&fit=crop',
-    rating: 5,
-    reviews: 61,
-    desc: 'Pre-shampoo warming oil blend for ultra-soft, manageable hair.',
-    category: 'mask-treatment'
-  }
-];
+import { useShopData } from '../context/ShopDataContext';
+
 
 const tips = [
   {
@@ -215,6 +143,7 @@ const StarRating = ({ rating }) => (
 );
 
 export default function HaircarePage() {
+  const { products } = useShopData();
   const { addToCart, cartCount } = useCart();
   const [addedId, setAddedId] = useState(null);
   
@@ -280,9 +209,10 @@ export default function HaircarePage() {
   };
 
   // Filter products
+  const haircareList = (products || []).filter(p => p.category === 'haircare');
   const filteredProducts = selectedCategory === 'all'
-    ? haircareProducts
-    : haircareProducts.filter(p => p.category === selectedCategory);
+    ? haircareList
+    : haircareList.filter(p => p.subCategory === selectedCategory);
 
   // Handle Quiz selection
   const handleQuizSelect = (key, value) => {

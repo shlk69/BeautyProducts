@@ -35,7 +35,7 @@ const Header = ({ cartCount }) => {
           {/* Utility Actions */}
           <div class="header-actions">
             <button class="action-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <button class="action-btn" aria-label="Account"><i class="fa-regular fa-user"></i></button>
+            <Link to="/profile" className="action-btn" aria-label="Account"><i className="fa-regular fa-user"></i></Link>
             <Link to="/cart" className="action-btn cart-toggle-btn" aria-label="Cart">
               <i className="fa-solid fa-bag-shopping"></i>
               <span className="cart-badge" id="cartCount">{cartCount}</span>
