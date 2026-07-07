@@ -294,7 +294,7 @@ const ProfilePage = () => {
                           <td style={{ maxWidth: '240px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                             {ord.items}
                           </td>
-                          <td style={{ fontWeight: '600' }}>${ord.total}</td>
+                          <td style={{ fontWeight: '600' }}>₹{ord.total}</td>
                           <td>
                             <button className="order-btn-detail" onClick={() => showToast(`Opening tracker for ${ord.id}...`)}>
                               Track
@@ -366,7 +366,7 @@ const ProfilePage = () => {
                         <div className="wishlist-details">
                           <h4>{item.name}</h4>
                           <div className="wishlist-price-bar">
-                            <span className="wishlist-price">${item.price}</span>
+                            <span className="wishlist-price">₹{item.price}</span>
                             <button 
                               className="wishlist-btn-add" 
                               onClick={() => handleAddToBag(item)}

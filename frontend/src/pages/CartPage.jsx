@@ -18,8 +18,8 @@ export default function CartPage() {
     cvv: ''
   });
 
-  const shippingCost = cartTotal >= 50 || cartTotal === 0 ? 0 : 5.99;
-  const taxCost = cartTotal * 0.08; // 8% tax
+  const shippingCost = cartTotal >= 500 || cartTotal === 0 ? 0 : 50.00;
+  const taxCost = cartTotal * 0.18; // 18% GST/tax for India
   const grandTotal = cartTotal + shippingCost + taxCost;
 
   const handleInputChange = (e) => {
@@ -80,7 +80,7 @@ export default function CartPage() {
                     </div>
                     <div className="cart-item-details">
                       <h3 className="cart-item-name">{item.name}</h3>
-                      <p className="cart-item-price">${item.price.toFixed(2)}</p>
+                      <p className="cart-item-price">₹{item.price.toFixed(2)}</p>
                     </div>
                     <div className="cart-item-actions-wrapper">
                       <div className="quantity-controller">
@@ -99,7 +99,7 @@ export default function CartPage() {
                         </button>
                       </div>
                       <p className="cart-item-subtotal">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₹{(item.price * item.quantity).toFixed(2)}
                       </p>
                       <button 
                         className="remove-item-btn" 
@@ -120,20 +120,20 @@ export default function CartPage() {
                 <h3>Order Summary</h3>
                 <div className="summary-row">
                   <span>Subtotal</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>₹{cartTotal.toFixed(2)}</span>
                 </div>
                 <div className="summary-row">
                   <span>Shipping</span>
-                  <span>{shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`}</span>
+                  <span>{shippingCost === 0 ? 'FREE' : `₹${shippingCost.toFixed(2)}`}</span>
                 </div>
                 <div className="summary-row">
                   <span>Estimated Tax</span>
-                  <span>${taxCost.toFixed(2)}</span>
+                  <span>₹{taxCost.toFixed(2)}</span>
                 </div>
                 <div className="summary-divider"></div>
                 <div className="summary-row grand-total">
                   <span>Total</span>
-                  <span>${grandTotal.toFixed(2)}</span>
+                  <span>₹{grandTotal.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -145,9 +145,9 @@ export default function CartPage() {
                     <label>Full Name</label>
                     <input 
                       type="text" 
-                      name="name" 
+                      name="fullName" 
                       required 
-                      value={formData.name} 
+                      value={formData.fullName} 
                       onChange={handleInputChange} 
                       placeholder="Jane Doe" 
                     />
@@ -171,7 +171,7 @@ export default function CartPage() {
                       required 
                       value={formData.address} 
                       onChange={handleInputChange} 
-                      placeholder="123 Luxury Lane" 
+                      placeholder="123 Luxury Way" 
                     />
                   </div>
                   <div className="form-row-2">
@@ -183,18 +183,18 @@ export default function CartPage() {
                         required 
                         value={formData.city} 
                         onChange={handleInputChange} 
-                        placeholder="New York" 
+                        placeholder="Beverly Hills" 
                       />
                     </div>
                     <div className="form-group">
-                      <label>ZIP Code</label>
+                      <label>Zip Code</label>
                       <input 
                         type="text" 
                         name="zip" 
                         required 
                         value={formData.zip} 
                         onChange={handleInputChange} 
-                        placeholder="10001" 
+                        placeholder="90210" 
                       />
                     </div>
                   </div>
@@ -235,7 +235,7 @@ export default function CartPage() {
                     </div>
                   </div>
                   <button type="submit" className="btn-place-order">
-                    PLACE ORDER &middot; ${grandTotal.toFixed(2)}
+                    PLACE ORDER &middot; ₹{grandTotal.toFixed(2)}
                   </button>
                 </form>
               </div>

@@ -20,8 +20,8 @@ const ProductCard = ({ name, price, oldPrice, img, rating, reviews, isSale, onAd
         </div>
         <h3 class="product-title">{name}</h3>
         <p class="product-price">
-          {oldPrice && <span class="old-price">${oldPrice}</span>}
-          ${price}
+          {oldPrice && <span class="old-price">₹{oldPrice}</span>}
+          ₹{price}
         </p>
       </div>
     </div>

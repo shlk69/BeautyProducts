@@ -6,7 +6,7 @@ const Header = ({ cartCount }) => {
     <>
       {/* Top Announcement Bar */}
       <div class="top-announcement">
-        <p><i class="fa-solid fa-truck-fast"></i> <strong>FREE SHIPPING</strong> on all orders over $50 | 30 Days Easy Returns</p>
+        <p><i class="fa-solid fa-truck-fast"></i> <strong>FREE SHIPPING</strong> on all orders over ₹500 | 30 Days Easy Returns</p>
       </div>
 
       {/* Header Navigation */}

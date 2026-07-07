@@ -72,6 +72,49 @@
   box-shadow: 0 4px 15px rgba(200, 75, 112, 0.2);
 }
 
+.sidebar-badge {
+  margin-left: auto;
+  background: rgba(200, 75, 112, 0.12);
+  color: #C84B70;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  min-width: 22px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.admin-menu-btn.active .sidebar-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.sidebar-add-product-btn {
+  background: linear-gradient(135deg, #C84B70, #A63454);
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-left: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(200, 75, 112, 0.2);
+  letter-spacing: 0.3px;
+}
+
+.sidebar-add-product-btn:hover {
+  background: linear-gradient(135deg, #A63454, #8a2a44);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(200, 75, 112, 0.3);
+}
+
 .admin-sidebar-footer {
   border-top: 1px solid rgba(200, 75, 112, 0.1);
   padding-top: 20px;

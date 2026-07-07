@@ -200,7 +200,13 @@ const AdminPage = () => {
             onClick={() => setActiveTab('products')}
           >
             <i className="fa-solid fa-boxes-stacked"></i> Products
+            <span className="sidebar-badge">{products.length}</span>
           </button>
+          {activeTab === 'products' && (
+            <button className="sidebar-add-product-btn" onClick={openAddProduct}>
+              <i className="fa-solid fa-plus"></i> Add Product
+            </button>
+          )}
           <button 
             className={`admin-menu-btn ${activeTab === 'categories' ? 'active' : ''}`}
             onClick={() => setActiveTab('categories')}
@@ -246,10 +252,10 @@ const AdminPage = () => {
           <>
             <div className="admin-stats-grid">
               <div className="admin-stat-card">
-                <div className="admin-stat-icon sales"><i className="fa-solid fa-dollar-sign"></i></div>
+                <div className="admin-stat-icon sales"><i className="fa-solid fa-indian-rupee-sign"></i></div>
                 <div className="admin-stat-info">
                   <span>Total Sales</span>
-                  <h3>${totalRevenue}</h3>
+                  <h3>₹{totalRevenue}</h3>
                 </div>
               </div>
               <div className="admin-stat-card">
@@ -340,8 +346,8 @@ const AdminPage = () => {
                         </td>
                         <td><span style={{ textTransform: 'capitalize' }}>{p.category}</span></td>
                         <td><span style={{ textTransform: 'capitalize' }}>{p.subCategory || '-'}</span></td>
-                        <td style={{ fontWeight: '600' }}>${Number(p.price).toFixed(2)}</td>
-                        <td>{p.oldPrice ? `$${Number(p.oldPrice).toFixed(2)}` : '-'}</td>
+                        <td style={{ fontWeight: '600' }}>₹{Number(p.price).toFixed(2)}</td>
+                        <td>{p.oldPrice ? `₹${Number(p.oldPrice).toFixed(2)}` : '-'}</td>
                         <td>
                           <div style={{ display: 'flex', gap: '5px' }}>
                             {p.isBestseller && <span style={{ background: '#d4af37', color: '#000', fontSize: '0.7rem', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold' }}>BEST</span>}
@@ -441,7 +447,7 @@ const AdminPage = () => {
                         <td style={{ fontWeight: '600', color: '#FFF' }}>{o.id}</td>
                         <td>{o.date}</td>
                         <td style={{ maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{o.items}</td>
-                        <td style={{ fontWeight: '600' }}>${Number(o.total).toFixed(2)}</td>
+                        <td style={{ fontWeight: '600' }}>₹{Number(o.total).toFixed(2)}</td>
                         <td>
                           <span style={{
                             padding: '4px 10px',
@@ -536,7 +542,7 @@ const AdminPage = () => {
                 />
               </div>
               <div className="admin-form-group">
-                <label>Price ($)</label>
+                <label>Price (₹)</label>
                 <input 
                   type="number" 
                   step="0.01"
@@ -546,7 +552,7 @@ const AdminPage = () => {
                 />
               </div>
               <div className="admin-form-group">
-                <label>Old Price ($)</label>
+                <label>Old Price (₹)</label>
                 <input 
                   type="number" 
                   step="0.01"

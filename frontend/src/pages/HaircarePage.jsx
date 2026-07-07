@@ -344,9 +344,9 @@ export default function HaircarePage() {
                   <span className="hc-reviews">({product.reviews})</span>
                 </div>
                 <div className="hc-product-price-row">
-                  <span className="hc-price">${product.price.toFixed(2)}</span>
+                  <span className="hc-price">₹{product.price.toFixed(2)}</span>
                   {product.oldPrice && (
-                    <span className="hc-old-price">${product.oldPrice.toFixed(2)}</span>
+                    <span className="hc-old-price">₹{product.oldPrice.toFixed(2)}</span>
                   )}
                 </div>
               </div>
@@ -399,7 +399,7 @@ export default function HaircarePage() {
                       <img src={prod.img} alt={prod.name} />
                       <div className="hc-rec-info">
                         <h5>{prod.name}</h5>
-                        <p>${prod.price.toFixed(2)}</p>
+                        <p>₹{prod.price.toFixed(2)}</p>
                         <button 
                           className={`hc-rec-add-btn ${addedId === prod.id ? 'added' : ''}`}
                           onClick={() => handleAdd(prod)}
