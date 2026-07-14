@@ -256,6 +256,7 @@ const AdminPage = () => {
                 <div className="admin-stat-info">
                   <span>Total Sales</span>
                   <h3>₹{totalRevenue}</h3>
+                  <div className="stat-trend positive"><i className="fa-solid fa-arrow-up"></i> +12.4% this month</div>
                 </div>
               </div>
               <div className="admin-stat-card">
@@ -263,6 +264,7 @@ const AdminPage = () => {
                 <div className="admin-stat-info">
                   <span>Catalog Size</span>
                   <h3>{products.length} Items</h3>
+                  <div className="stat-trend neutral"><i className="fa-solid fa-arrows-left-right"></i> Live inventory</div>
                 </div>
               </div>
               <div className="admin-stat-card">
@@ -270,6 +272,7 @@ const AdminPage = () => {
                 <div className="admin-stat-info">
                   <span>Active Orders</span>
                   <h3>{activeOrdersCount}</h3>
+                  <div className="stat-trend positive"><i className="fa-solid fa-arrow-up"></i> +4 new today</div>
                 </div>
               </div>
               <div className="admin-stat-card">
@@ -277,21 +280,22 @@ const AdminPage = () => {
                 <div className="admin-stat-info">
                   <span>VIP Members</span>
                   <h3>12 Registered</h3>
+                  <div className="stat-trend positive"><i className="fa-solid fa-arrow-up"></i> +2 new members</div>
                 </div>
               </div>
             </div>
 
             <div className="admin-section-card">
               <h2>Quick Actions</h2>
-              <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
+              <div className="admin-quick-actions-grid">
                 <button className="btn-admin-primary" onClick={openAddProduct}>
                   <i className="fa-solid fa-plus"></i> Add New Product
                 </button>
                 <button className="btn-admin-secondary" onClick={() => setActiveTab('orders')}>
-                  Manage Active Orders
+                  <i className="fa-solid fa-receipt"></i> Manage Active Orders
                 </button>
                 <button className="btn-admin-secondary" onClick={() => setActiveTab('content')}>
-                  Customize Store Banners
+                  <i className="fa-solid fa-sliders"></i> Customize Store Banners
                 </button>
               </div>
             </div>
@@ -350,8 +354,8 @@ const AdminPage = () => {
                         <td>{p.oldPrice ? `₹${Number(p.oldPrice).toFixed(2)}` : '-'}</td>
                         <td>
                           <div style={{ display: 'flex', gap: '5px' }}>
-                            {p.isBestseller && <span style={{ background: '#d4af37', color: '#000', fontSize: '0.7rem', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold' }}>BEST</span>}
-                            {p.isSale && <span style={{ background: '#C84B70', color: '#fff', fontSize: '0.7rem', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold' }}>SALE</span>}
+                            {p.isBestseller && <span className="flag-badge bestseller">BEST</span>}
+                            {p.isSale && <span className="flag-badge sale">SALE</span>}
                           </div>
                         </td>
                         <td>
@@ -398,9 +402,14 @@ const AdminPage = () => {
                   {categories.map(c => (
                     <tr key={c.id}>
                       <td style={{ fontWeight: '600', color: '#C84B70' }}>{c.id}</td>
-                      <td style={{ color: '#FFF', fontWeight: '600' }}>{c.name}</td>
+                      <td>
+                        <div className="admin-category-meta-cell">
+                          <img src={c.img} alt={c.name} className="admin-category-thumb" />
+                          <span className="admin-category-name">{c.name}</span>
+                        </div>
+                      </td>
                       <td>{c.desc}</td>
-                      <td style={{ fontSize: '0.8rem', color: '#A69595' }}>{c.img}</td>
+                      <td style={{ fontSize: '0.8rem', color: '#A69595', fontFamily: 'monospace' }}>{c.img}</td>
                       <td>
                         <button className="admin-icon-btn edit" onClick={() => openEditCategory(c)}>
                           <i className="fa-solid fa-pen-to-square"></i>
