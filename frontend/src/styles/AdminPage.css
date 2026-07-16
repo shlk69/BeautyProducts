@@ -715,3 +715,67 @@
 .admin-main::-webkit-scrollbar-thumb:hover {
   background: var(--admin-primary);
 }
+
+/* Pagination Styles */
+.admin-pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 10px 0;
+  border-top: 1px solid var(--admin-border);
+  margin-top: 20px;
+  font-family: var(--admin-font-sans);
+}
+
+.admin-pagination-info {
+  font-size: 0.88rem;
+  color: var(--admin-text-muted);
+}
+
+.admin-pagination-info span {
+  font-weight: 600;
+  color: var(--admin-text-main);
+}
+
+.admin-pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-pagination-btn {
+  background: var(--admin-card-bg);
+  border: 1px solid rgba(200, 75, 112, 0.12);
+  color: var(--admin-text-main);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--admin-transition);
+}
+
+.admin-pagination-btn:hover:not(:disabled) {
+  background: var(--admin-primary-light);
+  border-color: var(--admin-primary);
+  color: var(--admin-primary-hover);
+}
+
+.admin-pagination-btn.active {
+  background: linear-gradient(135deg, var(--admin-primary), var(--admin-primary-hover));
+  border-color: var(--admin-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(200, 75, 112, 0.15);
+}
+
+.admin-pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--admin-bg);
+}
+

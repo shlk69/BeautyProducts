@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useShopData } from '../context/ShopDataContext';
 import '../styles/AdminPage.css';
+import AdminLogin from '../components/AdminLogin';
+
 
 const AdminPage = () => {
   const {
@@ -20,6 +22,15 @@ const AdminPage = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [productSearch, setProductSearch] = useState('');
   const [orderSearch, setOrderSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem('isAdminAuthenticated') === 'true';
+  });
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    sessionStorage.setItem('isAdminAuthenticated', 'true');
+  };
 
   // Modals state
   const [productModal, setProductModal] = useState({ open: false, mode: 'add', data: null });
@@ -177,9 +188,31 @@ const AdminPage = () => {
     showToast('Homepage Hero Banner configurations updated!');
   };
 
+  // Navigation helper
+  const changeTab = (tab) => {
+    setActiveTab(tab);
+    setCurrentPage(1);
+  };
+
   // Calculations for stats
   const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0).toFixed(2);
   const activeOrdersCount = orders.filter(o => o.status === 'Processing' || o.status === 'Shipped').length;
+
+  // Pagination calculations
+  const itemsPerPage = 8;
+  const filteredProducts = products.filter(p =>
+    p.name.toLowerCase().includes(productSearch.toLowerCase())
+  );
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
+  const safeCurrentPage = Math.min(currentPage, totalPages) || 1;
+  const indexOfLastItem = safeCurrentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+
+  if (!isAuthenticated) {
+    return <AdminLogin onLoginSuccess={handleLoginSuccess} />;
+  }
 
   return (
     <div className="admin-wrapper">
@@ -191,13 +224,13 @@ const AdminPage = () => {
         <nav className="admin-menu">
           <button 
             className={`admin-menu-btn ${activeTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveTab('dashboard')}
+            onClick={() => changeTab('dashboard')}
           >
             <i className="fa-solid fa-chart-line"></i> Dashboard
           </button>
           <button 
             className={`admin-menu-btn ${activeTab === 'products' ? 'active' : ''}`}
-            onClick={() => setActiveTab('products')}
+            onClick={() => changeTab('products')}
           >
             <i className="fa-solid fa-boxes-stacked"></i> Products
             <span className="sidebar-badge">{products.length}</span>
@@ -209,19 +242,19 @@ const AdminPage = () => {
           )}
           <button 
             className={`admin-menu-btn ${activeTab === 'categories' ? 'active' : ''}`}
-            onClick={() => setActiveTab('categories')}
+            onClick={() => changeTab('categories')}
           >
             <i className="fa-solid fa-tags"></i> Categories
           </button>
           <button 
             className={`admin-menu-btn ${activeTab === 'orders' ? 'active' : ''}`}
-            onClick={() => setActiveTab('orders')}
+            onClick={() => changeTab('orders')}
           >
             <i className="fa-solid fa-receipt"></i> Orders
           </button>
           <button 
             className={`admin-menu-btn ${activeTab === 'content' ? 'active' : ''}`}
-            onClick={() => setActiveTab('content')}
+            onClick={() => changeTab('content')}
           >
             <i className="fa-solid fa-sliders"></i> Storefront Banners
           </button>
@@ -241,9 +274,36 @@ const AdminPage = () => {
             <h1>Admin Management Center</h1>
             <p>Welcome back, Administrator. Real-time changes are auto-persisted.</p>
           </div>
-          <div className="admin-avatar-box">
-            <span style={{ fontSize: '0.85rem', color: '#A69595', marginRight: '10px' }}>Admin Mode</span>
+          <div className="admin-avatar-box" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <span style={{ fontSize: '0.85rem', color: '#A69595' }}>Admin Mode</span>
             <i className="fa-solid fa-circle-user" style={{ fontSize: '2rem', color: '#C84B70' }}></i>
+            <button 
+              onClick={() => {
+                setIsAuthenticated(false);
+                sessionStorage.removeItem('isAdminAuthenticated');
+              }}
+              style={{
+                background: 'transparent',
+                border: '1px solid var(--admin-primary)',
+                color: 'var(--admin-primary)',
+                padding: '6px 12px',
+                borderRadius: '6px',
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                fontWeight: '600',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'var(--admin-primary)';
+                e.target.style.color = '#fff';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'transparent';
+                e.target.style.color = 'var(--admin-primary)';
+              }}
+            >
+              <i className="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
           </div>
         </header>
 
@@ -291,10 +351,10 @@ const AdminPage = () => {
                 <button className="btn-admin-primary" onClick={openAddProduct}>
                   <i className="fa-solid fa-plus"></i> Add New Product
                 </button>
-                <button className="btn-admin-secondary" onClick={() => setActiveTab('orders')}>
+                <button className="btn-admin-secondary" onClick={() => changeTab('orders')}>
                   <i className="fa-solid fa-receipt"></i> Manage Active Orders
                 </button>
-                <button className="btn-admin-secondary" onClick={() => setActiveTab('content')}>
+                <button className="btn-admin-secondary" onClick={() => changeTab('content')}>
                   <i className="fa-solid fa-sliders"></i> Customize Store Banners
                 </button>
               </div>
@@ -313,7 +373,10 @@ const AdminPage = () => {
                   className="admin-search-input" 
                   placeholder="Search products..."
                   value={productSearch}
-                  onChange={(e) => setProductSearch(e.target.value)}
+                  onChange={(e) => {
+                    setProductSearch(e.target.value);
+                    setCurrentPage(1);
+                  }}
                 />
                 <button className="btn-admin-primary" onClick={openAddProduct}>
                   <i className="fa-solid fa-plus"></i> Add Product
@@ -335,49 +398,82 @@ const AdminPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {products
-                    .filter(p => p.name.toLowerCase().includes(productSearch.toLowerCase()))
-                    .map(p => (
-                      <tr key={p.id}>
-                        <td>
-                          <div className="admin-product-meta-cell">
-                            <img src={p.img} alt={p.name} className="admin-product-thumb" />
-                            <div>
-                              <div className="admin-product-name">{p.name}</div>
-                              <div className="admin-product-desc">{p.desc}</div>
-                            </div>
+                  {currentProducts.map(p => (
+                    <tr key={p.id}>
+                      <td>
+                        <div className="admin-product-meta-cell">
+                          <img src={p.img} alt={p.name} className="admin-product-thumb" />
+                          <div>
+                            <div className="admin-product-name">{p.name}</div>
+                            <div className="admin-product-desc">{p.desc}</div>
                           </div>
-                        </td>
-                        <td><span style={{ textTransform: 'capitalize' }}>{p.category}</span></td>
-                        <td><span style={{ textTransform: 'capitalize' }}>{p.subCategory || '-'}</span></td>
-                        <td style={{ fontWeight: '600' }}>₹{Number(p.price).toFixed(2)}</td>
-                        <td>{p.oldPrice ? `₹${Number(p.oldPrice).toFixed(2)}` : '-'}</td>
-                        <td>
-                          <div style={{ display: 'flex', gap: '5px' }}>
-                            {p.isBestseller && <span className="flag-badge bestseller">BEST</span>}
-                            {p.isSale && <span className="flag-badge sale">SALE</span>}
-                          </div>
-                        </td>
-                        <td>
-                          <div className="admin-action-btns">
-                            <button className="admin-icon-btn edit" onClick={() => openEditProduct(p)} title="Edit">
-                              <i className="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button className="admin-icon-btn delete" onClick={() => {
-                              if (window.confirm(`Are you sure you want to delete ${p.name}?`)) {
-                                deleteProduct(p.id);
-                                showToast(`Deleted product "${p.name}".`);
-                              }
-                            }} title="Delete">
-                              <i className="fa-solid fa-trash"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                        </div>
+                      </td>
+                      <td><span style={{ textTransform: 'capitalize' }}>{p.category}</span></td>
+                      <td><span style={{ textTransform: 'capitalize' }}>{p.subCategory || '-'}</span></td>
+                      <td style={{ fontWeight: '600' }}>₹{Number(p.price).toFixed(2)}</td>
+                      <td>{p.oldPrice ? `₹${Number(p.oldPrice).toFixed(2)}` : '-'}</td>
+                      <td>
+                        <div style={{ display: 'flex', gap: '5px' }}>
+                          {p.isBestseller && <span className="flag-badge bestseller">BEST</span>}
+                          {p.isSale && <span className="flag-badge sale">SALE</span>}
+                        </div>
+                      </td>
+                      <td>
+                        <div className="admin-action-btns">
+                          <button className="admin-icon-btn edit" onClick={() => openEditProduct(p)} title="Edit">
+                            <i className="fa-solid fa-pen-to-square"></i>
+                          </button>
+                          <button className="admin-icon-btn delete" onClick={() => {
+                            if (window.confirm(`Are you sure you want to delete ${p.name}?`)) {
+                              deleteProduct(p.id);
+                              showToast(`Deleted product "${p.name}".`);
+                            }
+                          }} title="Delete">
+                            <i className="fa-solid fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
+
+            {filteredProducts.length > 0 && (
+              <div className="admin-pagination-container">
+                <div className="admin-pagination-info">
+                  Showing <span>{indexOfFirstItem + 1}</span> to <span>{Math.min(indexOfLastItem, filteredProducts.length)}</span> of <span>{filteredProducts.length}</span> products
+                </div>
+                {totalPages > 1 && (
+                  <div className="admin-pagination-buttons">
+                    <button 
+                      className="admin-pagination-btn"
+                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      disabled={safeCurrentPage === 1}
+                    >
+                      <i className="fa-solid fa-chevron-left"></i> Prev
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                      <button
+                        key={page}
+                        className={`admin-pagination-btn ${safeCurrentPage === page ? 'active' : ''}`}
+                        onClick={() => setCurrentPage(page)}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                    <button 
+                      className="admin-pagination-btn"
+                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                      disabled={safeCurrentPage === totalPages}
+                    >
+                      Next <i className="fa-solid fa-chevron-right"></i>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
 
