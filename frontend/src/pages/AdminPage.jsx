@@ -710,7 +710,6 @@ const AdminPage = () => {
                   value={productForm.desc}
                   onChange={(e) => setProductForm({ ...productForm, desc: e.target.value })}
                   required
-                  style={{ background: '#120F0F', color: '#FFF', border: '1px solid rgba(200,75,112,0.15)', padding: '10px', borderRadius: '6px' }}
                 />
               </div>
               <div className="admin-form-group">
