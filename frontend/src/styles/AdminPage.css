@@ -785,3 +785,59 @@
   background: var(--admin-bg);
 }
 
+/* Image Upload Area */
+.admin-img-upload-area {
+  border: 2px dashed var(--admin-border);
+  border-radius: 12px;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--admin-transition);
+  background: var(--admin-bg);
+  text-align: center;
+  min-height: 140px;
+}
+
+.admin-img-upload-area:hover,
+.admin-img-upload-area.drag-over {
+  border-color: var(--admin-primary);
+  background: var(--admin-primary-light);
+}
+
+.admin-img-upload-icon {
+  font-size: 2rem;
+  color: var(--admin-primary);
+  margin-bottom: 4px;
+}
+
+.admin-img-upload-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--admin-text-main);
+  margin: 0;
+}
+
+.admin-img-upload-sub {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+  margin: 0;
+}
+
+.admin-img-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid var(--admin-border);
+}
+
+.admin-img-change-hint {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
+  margin: 4px 0 0 0;
+}
+

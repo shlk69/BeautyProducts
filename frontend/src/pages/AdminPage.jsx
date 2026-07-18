@@ -797,12 +797,59 @@ const AdminPage = () => {
                 />
               </div>
               <div className="admin-form-group full-width">
-                <label>Category Icon/Thumbnail URL</label>
-                <input 
-                  type="text" 
-                  value={categoryForm.img}
+                <label>Category Image</label>
+                <div
+                  className="admin-img-upload-area"
+                  onClick={() => document.getElementById('cat-img-upload').click()}
+                  onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }}
+                  onDragLeave={(e) => e.currentTarget.classList.remove('drag-over')}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    e.currentTarget.classList.remove('drag-over');
+                    const file = e.dataTransfer.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                      const reader = new FileReader();
+                      reader.onload = (ev) => setCategoryForm({ ...categoryForm, img: ev.target.result });
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                >
+                  {categoryForm.img ? (
+                    <>
+                      <img src={categoryForm.img} alt="Preview" className="admin-img-preview" />
+                      <p className="admin-img-change-hint">Click or drag to change image</p>
+                    </>
+                  ) : (
+                    <>
+                      <i className="fa-solid fa-cloud-arrow-up admin-img-upload-icon"></i>
+                      <p className="admin-img-upload-text">Click or drag & drop image here</p>
+                      <p className="admin-img-upload-sub">PNG, JPG, WEBP supported</p>
+                    </>
+                  )}
+                </div>
+                <input
+                  id="cat-img-upload"
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = (ev) => setCategoryForm({ ...categoryForm, img: ev.target.result });
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+                <p style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)', marginTop: '8px' }}>
+                  Or paste an image URL:
+                </p>
+                <input
+                  type="text"
+                  placeholder="https://... or /images/..."
+                  value={categoryForm.img.startsWith('data:') ? '' : categoryForm.img}
                   onChange={(e) => setCategoryForm({ ...categoryForm, img: e.target.value })}
-                  required 
+                  style={{ marginTop: '4px' }}
                 />
               </div>
 
