@@ -14,6 +14,7 @@ const AdminPage = () => {
     addProduct,
     updateProduct,
     deleteProduct,
+    addCategory,
     updateCategory,
     updateHero,
     updateOrderStatus
@@ -34,7 +35,7 @@ const AdminPage = () => {
 
   // Modals state
   const [productModal, setProductModal] = useState({ open: false, mode: 'add', data: null });
-  const [categoryModal, setCategoryModal] = useState({ open: false, data: null });
+  const [categoryModal, setCategoryModal] = useState({ open: false, mode: 'edit', data: null });
 
   // Form states
   const [productForm, setProductForm] = useState({
@@ -161,13 +162,28 @@ const AdminPage = () => {
   // Category submission
   const handleCategorySubmit = (e) => {
     e.preventDefault();
-    updateCategory(categoryForm.id, {
-      name: categoryForm.name,
-      desc: categoryForm.desc,
-      img: categoryForm.img
-    });
-    showToast(`Updated category "${categoryForm.name}" successfully!`);
-    setCategoryModal({ open: false, data: null });
+    if (categoryModal.mode === 'add') {
+      addCategory({
+        name: categoryForm.name,
+        desc: categoryForm.desc,
+        img: categoryForm.img
+      });
+      showToast(`Category "${categoryForm.name}" added successfully!`);
+    } else {
+      updateCategory(categoryForm.id, {
+        name: categoryForm.name,
+        desc: categoryForm.desc,
+        img: categoryForm.img
+      });
+      showToast(`Updated category "${categoryForm.name}" successfully!`);
+    }
+    setCategoryModal({ open: false, mode: 'edit', data: null });
+  };
+
+  // Open Add Category
+  const openAddCategory = () => {
+    setCategoryForm({ id: '', name: '', desc: '', img: '' });
+    setCategoryModal({ open: true, mode: 'add', data: null });
   };
 
   // Open Edit Category
@@ -178,7 +194,7 @@ const AdminPage = () => {
       desc: cat.desc || '',
       img: cat.img
     });
-    setCategoryModal({ open: true, data: cat });
+    setCategoryModal({ open: true, mode: 'edit', data: cat });
   };
 
   // Hero submission
@@ -482,6 +498,9 @@ const AdminPage = () => {
           <div className="admin-section-card">
             <div className="admin-section-header">
               <h2>Categories Manager</h2>
+              <button className="btn-admin-primary" onClick={openAddCategory}>
+                <i className="fa-solid fa-plus"></i> Add Category
+              </button>
             </div>
             <div className="admin-table-container">
               <table className="admin-table">
@@ -753,11 +772,11 @@ const AdminPage = () => {
         </div>
       )}
 
-      {/* EDIT CATEGORY MODAL */}
+      {/* ADD / EDIT CATEGORY MODAL */}
       {categoryModal.open && (
-        <div className="admin-modal-overlay" onClick={() => setCategoryModal({ open: false, data: null })}>
+        <div className="admin-modal-overlay" onClick={() => setCategoryModal({ open: false, mode: 'edit', data: null })}>
           <div className="admin-modal-card" onClick={(e) => e.stopPropagation()}>
-            <h3>Customize Category: {categoryForm.name}</h3>
+            <h3>{categoryModal.mode === 'add' ? 'Add New Category' : `Customize Category: ${categoryForm.name}`}</h3>
             <form onSubmit={handleCategorySubmit} className="admin-form">
               <div className="admin-form-group full-width">
                 <label>Category Label Name</label>
@@ -788,11 +807,11 @@ const AdminPage = () => {
               </div>
 
               <div className="admin-modal-actions">
-                <button type="button" className="btn-admin-secondary" onClick={() => setCategoryModal({ open: false, data: null })}>
+                <button type="button" className="btn-admin-secondary" onClick={() => setCategoryModal({ open: false, mode: 'edit', data: null })}>
                   Cancel
                 </button>
                 <button type="submit" className="btn-admin-primary">
-                  Save Category
+                  {categoryModal.mode === 'add' ? 'Create Category' : 'Save Category'}
                 </button>
               </div>
             </form>
